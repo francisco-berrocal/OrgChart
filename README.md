@@ -2,8 +2,6 @@
 
 #### It's a simple and direct organization chart plugin. Anytime you want a tree-like chart, you can turn to OrgChart.
 
-#Native javascript version of orgchart is coming soon :blush:#
-
 ## Foreword
 - First of all, thanks a lot for [wesnolte](https://github.com/wesnolte)'s great work:blush: -- [jOrgChart](https://github.com/wesnolte/jOrgChart). The thought that using nested tables to build out the tree-like orgonization chart is amazing. This idea is more simple and direct than its counterparts based on svg.
 - Unfortunately, it's long time not to see the update of jOrgChart. on the other hand, I got some interesting ideas to add, so I choose to create a new repo.
@@ -17,20 +15,18 @@
 - Allows user to edit orgchart dynamically and save the final hierarchy as a JSON object.
 - Supports exporting chart as a picture.
 - Supports pan and zoom
-- Users can adopt multiple solutions to build up a huge organization chart(please refer to multiple-layers or hybrid layout sections)
-- touch-enabled plugin for mobile divice
 
 ## Installation
-Of course, you can directly use the standalone build by including dist/js/jquery.orgchart.js and dist/css/jquery.orgchart.css in your webapp.
+Of course, you can directly use the standalone build by including dist/js/jquery.orgchart.js and dist/css/jquery.orgchart.css in your webapp. 
 ### Install with Bower
 ```
-# From version 1.0.2 on, users can install orgchart and add it to bower.json dependencies
+# From version 1.0.2 on, users can install orgchart and add it to bower.json dependencies 
 $ bower install orgchart
 ```
 
 ### Install with npm
 ```
-# From version 1.0.4 on, users can install orgchart with npm
+# From version 1.0.4 on, users can install orgchart with npm 
 $ npm install orgchart
 ```
 require('orgchart') will load orgchart plugin onto the jQuery object. The orgchart module itself does not export anything.
@@ -83,7 +79,7 @@ var datasource = {
     { 'name': 'Chun Miao', 'title': 'department manager' }
   ]
 };
-
+    
 $('#chart-container').orgchart({
   'data' : datasource,
   'depth': 2,
@@ -99,7 +95,7 @@ $('#chart-container').orgchart({
 - **I wanna align orgchart with different orientation**(this feature comes from [the good idea of fvlima and badulesia :blush:](https://github.com/dabeng/OrgChart/issues/5))
 
   Top to Bottom -- default direction, as you can see all other examples on this page.
-
+  
   [Bottom to Top](http://dabeng.github.io/OrgChart/direction/bottom2top)
 ```js
 // sample of core source code
@@ -160,7 +156,7 @@ $('#chart-container').orgchart({
 Note: when users use ajaxURL option to build orghchart, they must use json datasource(both local and remote are OK) and set the relationship property of datasource by themselves. All of these staff are used to generate the correct expanding/collapsing arrows for nodes.
 ```js
 // sample of core source code
-var datasource = {
+var datascource = {
   'id': '1',
   'name': 'Su Miao',
   'title': 'department manager',
@@ -174,18 +170,12 @@ var datasource = {
 var ajaxURLs = {
   'children': '/orgchart/children/',
   'parent': '/orgchart/parent/',
-  // It would be helpful to have functions instead of URLs for the AJAX fetching
-  // as it would allow a more flexible treatment of the results.
-  'siblings': function(nodeData) {
-    return '/orgchart/siblings/' + nodeData.id;
-  },
-  'families': function(nodeData) {
-    return '/orgchart/families/' + nodeData.id;
-  }
+  'siblings': '/orgchart/siblings/',
+  'families': '/orgchart/families/' 
 };
 
 $('#chart-container').orgchart({
-  'data' : datasource,
+  'data' : datascource,
   'ajaxURL': ajaxURLs,
   'nodeContent': 'title',
   'nodeId': 'id'
@@ -197,7 +187,7 @@ $('#chart-container').orgchart({
 ```js
 // sample of core source code
 $('#chart-container').orgchart({
-  'data' : datasource,
+  'data' : datascource,
   'depth': 2,
   'nodeContent': 'title',
   'nodeID': 'id',
@@ -221,13 +211,13 @@ Here, we need the help from [html2canvas](https://github.com/niklasvh/html2canva
 ```js
 // sample of core source code
 $('#chart-container').orgchart({
-  'data' : datasource,
+  'data' : datascource,
   'depth': 2,
   'nodeContent': 'title',
   'exportButton': true,
   'exportFilename': 'MyOrgChart'
 });
-```
+``` 
 ![export orgchart](http://dabeng.github.io/OrgChart/export-orgchart/recorder.gif)
 
 - **[I wanna itegrate organization chart with geographic information](http://dabeng.github.io/OrgChart/integrate-map/)**
@@ -258,7 +248,7 @@ var map = new ol.Map({
 });
 $('body').prepend(map.getViewport());
 
-var datasource = {
+var datascource = {
   'name': 'Lao Lao',
   'title': 'President Office',
   'position': [-87.6297980, 41.8781140],
@@ -270,7 +260,7 @@ var datasource = {
 };
 
 $('#chart-container').orgchart({
-  'data' : datasource,
+  'data' : datascource,
   'nodeContent': 'title',
   'createNode': function($node, data) {
     $node.on('click', function() {
@@ -292,7 +282,7 @@ $('#chart-container').orgchart({
     });
   }
 });
-```
+``` 
 ![integrate map](http://dabeng.github.io/OrgChart/integrate-map/recorder.gif)
 
 - **[I wanna edit orgchart](http://dabeng.github.io/OrgChart/edit-orgchart/)**
@@ -301,7 +291,7 @@ With the help of exposed core methods(addParent(), addSiblings(), addChildren(),
 ```js
 // sample of core source code
 $('#chart-container').orgchart({
-  'data' : datasource,
+  'data' : datascource,
   'exportButton': true,
   'exportFilename': 'SportsChart',
   'parentNodeSymbol': 'fa-th-large',
@@ -362,7 +352,7 @@ $('#btn-delete-nodes').on('click', function() {
 
 - **[I wanna drag & drop the nodes of orgchart](http://dabeng.github.io/OrgChart/drag-drop/)**
 
-Users are allowed to drag & drop the nodes of orgchart when option "draggable" is assigned to true(**Note**: this feature doesn't work on IE due to its poor support for HTML5 drag & drop API).
+Users are allowed to drag & drop the nodes of orgchart when option "draggable" is assigned to true.
 
 ![drag & drop](http://dabeng.github.io/OrgChart/drag-drop/recorder.gif)
 
@@ -370,7 +360,7 @@ Furthermore, users can make use of option dropCriteria to inject their custom li
 ```js
 // sample of core source code
 $('#chart-container').orgchart({
-  'data' : datasource,
+  'data' : datascource,
   'nodeContent': 'title',
   'draggable': true,
   'dropCriteria': function($draggedNode, $dragZone, $dropZone) {
@@ -421,7 +411,7 @@ $('#btn-export-hier').on('click', function() {
 
 It's a so easy task, we just need to append id or className property to node data.
 ```js
-var datasource = {
+var datascource = {
   'name': 'Lao Lao',
   'title': 'general manager',
   'className': 'top-level',
@@ -462,43 +452,23 @@ In fact, this is a wonderful solution to display a orgchart which includes a hug
 
 ![multiple layers](http://dabeng.github.io/OrgChart/multiple-layers/recorder.gif)
 
-- **[I want a hybrid(horizontal + vertical) chart](http://dabeng.github.io/OrgChart/vertical-depth/)**
-
-This feature is inspired by the issues([Aligning Children Vertical](https://github.com/dabeng/OrgChart/issues/46), [Hybrid(horizontal + vertical) OrgChart](https://github.com/dabeng/OrgChart/issues/61)). Thank [mfahadi](https://github.com/mfahadi) and [Destructrix](https://github.com/Destructrix) for their constructive suggestions:blush:
-
-From now on, users never have to worry about how to align a huge of nodes in one screen of browser. The option "verticalDepth" allows users to align child nodes vertically from the given depth.
-
-**Note**: currently, this option is incompatible with many other options or methods, like direction, drag&drop, addChildren(), removeNodes(), getHierarchy() and so on. These conflicts will be solved one by one in the later versions.
-
-```js
-// sample of core source code
-$('#chart-container').orgchart({
-  'data' : datasource,
-  'nodeContent': 'title',
-  'verticalDepth': 3 // From the 3th level of orgchart, nodes will be aligned vertically.
-});
-```
-
-![hybrid layout](http://dabeng.github.io/OrgChart/vertical-depth/snapshot.png)
-
 ## Usage
 
 ### Instantiation Statement
 ```js
 $('#chartContainerId').orgchart(options);
-```
+``` 
 
 ### Structure of Datasource
 ```js
 {
-  'id': 'rootNode', // It's a optional property which will be used as id attribute of node
-  // and data-parent attribute, which contains the id of the parent node
+  'id': 'rootNode', // It's a optional property which will be used as id attribute of node.
   'className': 'top-level', // It's a optional property which will be used as className attribute of node.
   'nodeTitlePro': 'Lao Lao',
   'nodeContentPro': 'general manager',
   'relationship': relationshipValue, // Note: when you activate ondemand loading nodes feature,
   // you should use json datsource (local or remote) and set this property.
-  // This property implies that whether this node has parent node, siblings nodes or children nodes.
+  // This property implies that whether this node has parent node, siblings nodes or children nodes. 
   // relationshipValue is a string composed of three "0/1" identifier.
   // First character stands for wether current node has parent node;
   // Scond character stands for wether current node has siblings nodes;
@@ -515,7 +485,7 @@ $('#chartContainerId').orgchart(options);
   ],
   'otherPro': anyValue
 };
-```
+``` 
 
 ### Options
 <table>
@@ -536,13 +506,10 @@ $('#chartContainerId').orgchart(options);
       <td>direction</td><td>string</td><td>no</td><td>"t2b"</td><td>The available values are t2b(implies "top to bottom", it's default value), b2t(implies "bottom to top"), l2r(implies "left to right"), r2l(implies "right to left").</td>
     </tr>
     <tr>
-      <td>verticalDepth</td><td>integer</td><td>no</td><td></td><td>Users can make use of this option to align the nodes vertically from the specified depth.</td>
-    </tr>
-    <tr>
       <td>toggleSiblingsResp</td><td>boolean</td><td>no</td><td>false</td><td>Once enable this option, users can show/hide left/right sibling nodes respectively by clicking left/right arrow.</td>
     </tr>
     <tr>
-      <td>ajaxURL</td><td>json</td><td>no</td><td></td><td>It inclueds four properites -- parent, children, siblings, families(ask for parent node and siblings nodes). As their names imply, different propety provides the URL to which ajax request for different nodes is sent.</td>
+      <td>ajaxURL</td><td>json</td><td>no</td><td></td><td>It inclueds four properites -- parent, children, siblings, families(ask for parent node and siblings nodes). As their names imply, different propety indicates the URL to which ajax request for different nodes is sent.</td>
     </tr>
     <tr>
       <td>depth</td><td>positive integer</td><td>no</td><td>999</td><td>It indicates the level that at the very beginning orgchart is expanded to.</td>
@@ -572,7 +539,7 @@ $('#chartContainerId').orgchart(options);
       <td>chartClass</td><td>string</td><td>no</td><td>""</td><td>when you wanna instantiate multiple orgcharts on one page, you should add diffent classname to them in order to distinguish them.</td>
     </tr>
     <tr>
-      <td>draggable</td><td>boolean</td><td>no</td><td>false</td><td>Users can drag & drop the nodes of orgchart if they enable this option. **Note**: this feature doesn't work on IE due to its poor support for HTML5 drag & drop API.</td>
+      <td>draggable</td><td>boolean</td><td>no</td><td>false</td><td>Users can drag & drop the nodes of orgchart if they enable this option</td>
     </tr>
     <tr>
       <td>dropCriteria</td><td>function</td><td>no</td><td></td><td>Users can construct their own criteria to limit the relationships between dragged node and drop zone. Furtherly, this function accept three arguments(draggedNode, dragZone, dropZone) and just only return boolen values.</td>
@@ -630,126 +597,7 @@ Removes the designated node and its descedant nodes.
   </tbody>
 </table>
 ##### .orgchart('getHierarchy'）
-This method is designed to get the hierarchy relationships of orgchart for further processing. For example, after editing the orgchart, you could send the returned value of this method to server-side and save the new state of orghcart.
-##### .orgchart('hideDescendants',$node)
-This method allows you to hide programatically the children of any specific node(.node element), if it has
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Required</th>
-    <th>Default</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>$node</td>
-    <td>JQuery Object</td>
-    <td>Yes</td>
-    <td>None</td>
-    <td>Is the desired JQuery Object to hide its children nodes</td>
-  </tr>
-</table>
-##### .orgchart('showDescendants',$node)
-This method allows you to show programatically the children of any specific node(.node element), if it has
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Required</th>
-    <th>Default</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>$node</td>
-    <td>JQuery Object</td>
-    <td>Yes</td>
-    <td>None</td>
-    <td>Is the desired JQuery Object to show its children nodes</td>
-  </tr>
-</table>
-##### .orgchart('hideSiblings',$node,direction)
-This method allows you to hide programatically the siblings of any specific node(.node element), if it has
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Required</th>
-    <th>Default</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>$node</td>
-    <td>JQuery Object</td>
-    <td>Yes</td>
-    <td>None</td>
-    <td>Is the desired JQuery Object to hide its siblings nodes</td>
-  </tr>
-  <tr>
-    <td>direction</td>
-    <td>string</td>
-    <td>No</td>
-    <td>None</td>
-    <td>Possible values:"left","rigth". Specifies if hide the siblings at left or rigth. If not defined hide both of them.</td>
-  </tr>
-</table>
-##### .orgchart('showSiblings',$node,direction)
-This method allows you to show programatically the siblings of any specific node(.node element), if it has
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Required</th>
-    <th>Default</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>$node</td>
-    <td>JQuery Object</td>
-    <td>Yes</td>
-    <td>None</td>
-    <td>Is the desired JQuery Object to show its siblings nodes</td>
-  </tr>
-  <tr>
-    <td>direction</td>
-    <td>string</td>
-    <td>No</td>
-    <td>None</td>
-    <td>Possible values:"left","rigth". Specifies if hide the siblings at left or rigth. If not defined hide both of them.</td>
-  </tr>
-</table>
-##### .orgchart('getNodeState',$node,relation)
-This method returns you the specified relation of a node
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Required</th>
-    <th>Default</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>$node</td>
-    <td>JQuery Object</td>
-    <td>Yes</td>
-    <td>None</td>
-    <td>Is the desired JQuery Object to know its relationship</td>
-  </tr>
-  <tr>
-    <td>relation</td>
-    <td>String</td>
-    <td>No</td>
-    <td>None</td>
-    <td>Possible values:"children","parent". Specifies the desired relation to return, in case the parameter is not defined, it will return the siblings.</td>
-  </tr>
-</table>
-The returning object will have the next structure:
-```js
-{
-  "exists": true|false,  //Indicates if has parent|children|siblings
-  "visible":true|false,  //Indicates if the relationship nodes are visible
-  "nodes": JQueryObject  //The jquery object with the matching elements
-}
-```
+This method is designed to get the hierarchy relationships of orgchart for further processing. For example, after editing the orgchart, you could send the returned value of this method to server-side and save the new statte of orghcart. 
 
 ### Events
 <table>
@@ -764,50 +612,13 @@ The returning object will have the next structure:
 ### Tips
 **How can I deactivate expand/collapse feature of orgchart?**
 
-This use case is inspired by the [issue](https://github.com/dabeng/OrgChart/issues/25). Thanks [der-robert](https://github.com/der-robert) and [ActiveScottShaw](https://github.com/ActiveScottShaw) for their constructive discussions:blush:
+This use case is inspired by the [issue](https://github.com/dabeng/OrgChart/issues/25). Thank [der-robert](https://github.com/der-robert) and [ActiveScottShaw](https://github.com/ActiveScottShaw) for their constructive discussions:blush:
 
 Users can enable/disable exapand/collapse feature with className "noncollapsable" as shown below.
 ```js
-$('.orgchart').addClass('noncollapsable'); // deactivate
+$('.orgchart').addClass('noncollapsable'); // deactivate 
 
 $('.orgchart').removeClass('noncollapsable'); // activate
-```
-
-**How can I search nodes and show the minimized chart?**
-
-This use case is inspired by the [issue](https://github.com/dabeng/OrgChart/issues/78). Thanks [Mmannem](https://github.com/Mmannem) for his constructive discussions:blush:
-The following statements show the core logic and this is the complete [demo - filter node](http://dabeng.github.io/OrgChart/filter-node).
-```js
-var $chart = $('.orgchart');
-// disalbe the expand/collapse feture
-$chart.addClass('noncollapsable');
-// distinguish the matched nodes and the unmatched nodes according to the given key word
-$chart.find('.node').filter(function(index, node) {
-    return $(node).text().toLowerCase().indexOf(keyWord) > -1;
-  }).addClass('matched')
-  .closest('table').parents('table').find('tr:first').find('.node').addClass('retained');
-// hide the unmatched nodes
-$chart.find('.matched,.retained').each(function(index, node) {
-  var $unmatched = $(node).closest('table').parent().siblings().find('.node:first:not(.matched,.retained)')
-    .closest('table').parent().addClass('hidden');
-  $unmatched.parent().prev().children().slice(1, $unmatched.length * 2 + 1).addClass('hidden');
-});
-// hide the redundant descendant nodes of the matched nodes
-$chart.find('.matched').each(function(index, node) {
-  if (!$(node).closest('tr').siblings(':last').find('.matched').length) {
-    $(node).closest('tr').siblings().addClass('hidden');
-  }
-});
-```
-
-**Why is the root node gone?**
-
-When I have a huge orgchart with enabled "pan" option, if I hide all the children of one of the topmost parents then the chart disappear from screen. It seems that we need to add a reset button to keep the chart visible.
-For details, please refer to the [issue](https://github.com/dabeng/OrgChart/issues/85) opened by [manuel-84](https://github.com/manuel-84) :blush:
-
-Users can embed any clear up logics into the click handler of the reset buttton as shown below.
-```js
-$('.orgchart').css('transform',''); // remove the tansform settings
 ```
 
 ## Browser Compatibility

@@ -847,7 +847,7 @@
     if(satellites.constructor !== Array) {
       satellites = [satellites]
     }
-    var $container = $el.is('.node') ? $el.parent() : $el.find('td:first')
+    let $container = $el.is('.node') ? $el.parent() : $el.find('td:first')
     satellites.forEach(function(satellite) {
       satellite
       .prop('draggable', true)

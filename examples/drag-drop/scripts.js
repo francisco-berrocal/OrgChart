@@ -27,7 +27,7 @@
       ]
     };
 
-    $('#chart-container').orgchart({
+    var options = {
       'data' : datascource,
       'nodeContent': 'title',
       'draggable': true,
@@ -36,8 +36,12 @@
           return false;
         }
         return true;
+      },
+      createSatellite: function() {
+        return $('<span> Francisco </span>')
       }
-    })
+    };
+    $('#chart-container').data('options', options).orgchart(options)
     .children('.orgchart').on('nodedropped.orgchart', function(event) {
       console.log('draggedNode:' + event.draggedNode.children('.title').text()
         + ', dragZone:' + event.dragZone.children('.title').text()
